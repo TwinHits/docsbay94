@@ -1,11 +1,13 @@
 <template>
-    <v-alert class="error-alert" border="left" dismissible elevation="2" color="#767473" >
+    <v-alert class="error-alert" border="left" dismissible elevation="2" :color="color">
         {{ message }}
     </v-alert>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
+import * as Constants from '@/common/constants';
 
 export default Vue.extend({
     props: {
@@ -14,6 +16,11 @@ export default Vue.extend({
             required: false,
             default: undefined,
         },
+    },
+    data() {
+        return {
+            color: Constants.COLORS.BACKGROUND_GREY as string,
+        };
     },
     computed: {
         message(): string {
@@ -25,7 +32,4 @@ export default Vue.extend({
 
 <style lang="scss">
 @import '@/styles/colors.scss';
-
-.error-alert {
-}
 </style>
