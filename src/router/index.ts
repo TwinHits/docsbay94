@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import HomePage from '@/components/HomePage.vue';
+import DocumentationView from '@/components/DocumentationView.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
     {
         path: '/',
-        name: 'HomePage',
-        component: HomePage,
+        name: 'DocumentationView',
+        component: DocumentationView,
     },
 ];
 
