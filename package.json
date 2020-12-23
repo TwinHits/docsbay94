@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "fix": "npx prettier --write src",
-    "format": "npm run format && npm run fix",
+    "fix": "npx prettier --write src/**/*.vue",
+    "format": "npm run lint && npm run fix",
     "start": "vue-cli-service serve"
   },
   "dependencies": {
