@@ -1,9 +1,9 @@
 <template>
     <div class="home-page">
         <v-img class="tie-logo" contain :src="logoUrl" />
-        <v-row class="docs" v-for="(docs, index) of docsUrls" :key="index">
+        <v-row class="docs" v-for="(d, index) of docs" :key="index">
             <v-col>
-                {{ docs }}
+                {{ d }}
             </v-col>
         </v-row>
         <ErrorAlert v-if="error" :error="error" />
@@ -17,13 +17,15 @@ import ErrorAlert from '@/components/common/ErrorAlert.vue';
 
 import DocsApi from '@/api/docs';
 
+import Documentation from '@/api/types/documentation';
+
 export default Vue.extend({
     data() {
         return {
             loading: true as boolean,
             logoUrl: 'https://raw.githubusercontent.com/TwinHits/TIEngine/master/assets/textures/logo.png' as string,
             docsUrls: ['https://raw.githubusercontent.com/TwinHits/TIEngine/master/docs/docs.json'] as string[],
-            docs: [] as string[],
+            docs: [] as Documentation[],
             error: undefined as Error | undefined,
         };
     },
@@ -33,11 +35,9 @@ export default Vue.extend({
     async mounted() {
         this.loading = true;
         try {
-            const docs = [];
             for (const url of this.docsUrls) {
-                docs.push(await DocsApi.getJSONFromURL(url));
+                this.docs.push(await DocsApi.getJSONFromURL(url));
             }
-            return docs;
         } catch (error) {
             this.error = error;
         } finally {
