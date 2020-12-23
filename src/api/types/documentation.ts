@@ -1,5 +1,5 @@
-export default interface TIEngineDocumentation {
-    interfaces: Class[];
+export default interface Documentation {
+    classes: Class[];
 }
 
 export interface Class {
