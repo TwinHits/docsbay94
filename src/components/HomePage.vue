@@ -1,6 +1,5 @@
 <template>
     <div class="home-page">
-        <v-img class="tie-logo" contain :src="logoUrl" />
         <v-row class="docs" v-for="(d, index) of docs" :key="index">
             <v-col>
                 {{ d }}
@@ -48,10 +47,6 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 @import '@/styles/colors.scss';
-
-.tie-logo {
-    width: 25vw;
-}
 
 .docs {
     color: white;

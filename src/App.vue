@@ -1,12 +1,28 @@
 <template>
-    <v-app>
+    <v-app app>
+        <TopNavBar />
         <v-main>
-            <v-container id="app">
+            <v-container id="app" fluid>
                 <router-view />
             </v-container>
         </v-main>
+        <BottomNavBar />
     </v-app>
 </template>
+
+<script lang="ts">
+import Vue from 'vue';
+
+import BottomNavBar from '@/components/navigation/BottomNavBar.vue';
+import TopNavBar from '@/components/navigation/TopNavBar.vue';
+
+export default Vue.extend({
+    components: {
+        BottomNavBar,
+        TopNavBar,
+    },
+});
+</script>
 
 <style lang="scss">
 @import '@/styles/colors.scss';
