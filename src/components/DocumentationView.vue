@@ -3,15 +3,17 @@
         <v-row class="expansion-panels-row">
             <v-expansion-panels inset class="expansion-panels">
                 <v-expansion-panel
-                    v-for="(interfaceDocs, index) in documentation.interfaces"
+                    v-for="(classDefinition, index) in documentation.classes"
                     :key="index"
                     class="expansion-panel"
                 >
                     <v-expansion-panel-header class="expansion-panel-header">
-                        <InterfaceCard :interface="interfaceDocs" />
+                        <ClassCard :classDefinition="classDefinition" />
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="expansion-panel-content">
-                        {{ interfaceDocs }}
+                        <template v-for="(method, index) in classDefinition.methods">
+                            <MethodCard :method="method" :key="index" class="method-card" />
+                        </template>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-expansion-panels>
@@ -24,7 +26,8 @@
 import Vue from 'vue';
 
 import ErrorAlert from '@/components/common/ErrorAlert.vue';
-import InterfaceCard from '@/components/documentation/InterfaceCard.vue';
+import ClassCard from '@/components/documentation/ClassCard.vue';
+import MethodCard from '@/components/documentation/MethodCard';
 
 import DocsApi from '@/api/docs';
 
@@ -41,7 +44,8 @@ export default Vue.extend({
     },
     components: {
         ErrorAlert,
-        InterfaceCard,
+        ClassCard,
+        MethodCard,
     },
     async mounted() {
         this.loading = true;
@@ -70,6 +74,10 @@ export default Vue.extend({
 }
 
 .expansion-panel-content {
-    background-color: $highlight-grey;
+    background-color: $background-grey;
+}
+
+.method-card {
+    margin: 1vh 1vw 1vh 1vw;
 }
 </style>

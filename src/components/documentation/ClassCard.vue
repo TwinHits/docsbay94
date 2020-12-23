@@ -1,10 +1,10 @@
 <template>
-    <v-card class="interface-card" outlined elevation="1" :color="color">
+    <v-card class="class-card" outlined elevation="1" :color="color">
         <v-card-title>
-            {{ Interface.name }}
+            {{ classDefinition.name }}
         </v-card-title>
         <v-card-subtitle>
-            {{ Interface.description }}
+            {{ classDefinition.description }}
         </v-card-subtitle>
     </v-card>
 </template>
@@ -13,14 +13,14 @@
 import Vue, { PropType } from 'vue';
 
 import * as Constants from '@/common/constants';
-import Interface from '@/api/types/documentation';
+import Class from '@/api/types/documentation';
 
 export default Vue.extend({
     props: {
-        Interface: {
-            type: Object as PropType<Interface>,
+        classDefinition: {
+            type: Object as PropType<Class>,
             required: true,
-        }
+        },
     },
     data() {
         return {
@@ -29,7 +29,6 @@ export default Vue.extend({
     },
 });
 </script>
-
 
 <style scoped lang="scss">
 @import '@/styles/colors.scss';
