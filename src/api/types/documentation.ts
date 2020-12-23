@@ -9,7 +9,7 @@ export interface Class {
 }
 
 export interface Method {
-    name: string;    
+    name: string;
     description: string;
     parameters: Parameter[];
     returns: Type;
