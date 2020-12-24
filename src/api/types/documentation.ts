@@ -1,24 +1,24 @@
-export default interface Documentation {
-    classes: Class[];
+export interface DocumentationResponse {
+    classes: ClassResponse[];
 }
 
-export interface Class {
+export interface ClassResponse {
     name: string;
     description: string;
-    methods: Method[];
+    methods: MethodResponse[];
 }
 
-export interface Method {
+export interface MethodResponse {
     name: string;
     description: string;
-    parameters: Parameter[];
+    parameters: ParameterResponse[];
     returns: Type;
 }
 
-export interface Parameter {
+export interface ParameterResponse {
     name: string;
-    description: string;
     type: Type;
+    description: string;
 }
 
 export type Type = 'string' | 'boolean' | 'tientity' | 'float' | 'integer' | 'Vector2f' | 'Vector2i';

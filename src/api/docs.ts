@@ -1,10 +1,11 @@
-import Documentation from '@/api/types/documentation';
+import { DocumentationResponse } from '@/api/types/documentation';
+import { Documentation } from '@/common/types/documentation';
 
 class DocsApi {
-    public async getJSONFromURL(url: string): Promise<Documentation> {
+    public async getDocsFromURL(url: string): Promise<Documentation> {
         try {
-            const response = await (await fetch(url)).json();
-            return response;
+            const response = (await (await fetch(url)).json()) as DocumentationResponse;
+            return new Documentation(response);
         } catch (error) {
             console.error(error);
             throw error;
