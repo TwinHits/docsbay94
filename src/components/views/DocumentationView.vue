@@ -19,11 +19,12 @@
                             <template v-for="(method, index) in classDefinition.methods">
                                 <MethodCard :method="method" :key="index" class="method-card" v-if="method.display" />
                             </template>
+                            <CreateNewMethod @newMethod="addNewMethod($event, classDefinition)" />
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </template>
             </v-expansion-panels>
-            <NewClassButton @newClass="addNewClass" />
+            <CreateNewClass @newClass="addNewClass" />
         </v-row>
         <ErrorAlert v-if="error" :error="error" />
     </div>
@@ -35,12 +36,13 @@ import Vue from 'vue';
 import ClassCard from '@/components/documentation/ClassCard.vue';
 import ErrorAlert from '@/components/common/ErrorAlert.vue';
 import MethodCard from '@/components/documentation/MethodCard.vue';
-import NewClassButton from '@/components/documentation/NewClassButton.vue';
+import CreateNewClass from '@/components/documentation/CreateNewClass.vue';
+import CreateNewMethod from '@/components/documentation/CreateNewMethod.vue';
 import SearchBar from '@/components/documentation/SearchBar.vue';
 
 import DocsApi from '@/api/docs';
 
-import { Class, Documentation } from '@/common/types/documentation';
+import { Class, Documentation, Method } from '@/common/types/documentation';
 
 import * as Constants from '@/common/constants';
 
@@ -58,9 +60,10 @@ export default Vue.extend({
     },
     components: {
         ClassCard,
+        CreateNewClass,
+        CreateNewMethod,
         ErrorAlert,
         MethodCard,
-        NewClassButton,
         SearchBar,
     },
     methods: {
@@ -77,6 +80,9 @@ export default Vue.extend({
             this.expandedPanels = [];
             this.documentation.classes.push(newClass);
         },
+        addNewMethod(newMethod: Method, currentClass: Class) {
+           currentClass.methods.push(newMethod);
+        }
     },
     async mounted() {
         this.loading = true;
@@ -118,6 +124,7 @@ export default Vue.extend({
 
 .expansion-panel-content {
     background-color: $background-grey;
+    padding-bottom: 6vh;
 }
 
 .method-card {
