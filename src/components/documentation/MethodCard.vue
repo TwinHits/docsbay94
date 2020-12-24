@@ -6,7 +6,7 @@
         <v-card-subtitle class="method-description">
             <EditableTextField :content="method.description" @save="saveDescription" />
         </v-card-subtitle>
-        <template v-if="method.parameters && method.parameters.length > 0">
+        <template v-if="method.parameters">
             <v-card-subtitle class="parameter-label">
                 Parameters:
             </v-card-subtitle>
@@ -14,9 +14,9 @@
                 <template v-for="(parameter, index) in method.parameters">
                     <ParameterChip :parameter="parameter" :key="index" />
                 </template>
+                <CreateNewParameter @newParameter="addNewParameter($event, method)" />
             </v-card-text>
         </template>
-        <CreateNewParameter @newParameter="addNewParameter($event, method)" />
         <v-card-subtitle class="returns-label">
             Returns:
         </v-card-subtitle>

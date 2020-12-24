@@ -1,7 +1,7 @@
 <template>
     <v-footer elevation="2" :color="color">
         <v-row>
-            <v-col> {{ new Date().getFullYear() }} — <strong>TIEngine</strong> </v-col>
+            <v-col> {{ new Date().getFullYear() }} — <strong>Docs Bay 94</strong> </v-col>
         </v-row>
     </v-footer>
 </template>

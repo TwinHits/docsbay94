@@ -21,7 +21,7 @@ export default Vue.extend({
             name: NAME_THIS_PARAMETER as string,
             description: DESCRIBE_THIS_PARAMETER as string,
             type: TYPE as Type,
-            color: Constants.COLORS.HIGHLIGHT_GREY,
+            color: Constants.COLORS.BACKGROUND_GREY,
         };
     },
     methods: {
@@ -41,6 +41,6 @@ export default Vue.extend({
 @import '@/styles/colors.scss';
 
 .create-new-parameter {
-    margin: -1vh 0 2vh 3vw;
+    margin: 0vh 0vw 2vh 2vw;
 }
 </style>
