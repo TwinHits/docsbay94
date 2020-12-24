@@ -6,7 +6,6 @@
         </v-row>
         <v-row class="expansion-panels-row">
             <v-expansion-panels inset multiple class="expansion-panels" v-model="expandedPanels" :tile="true">
-                <!-- Class Panels -->
                 <template v-for="(classDefinition, index) in filteredDocumentation.classes">
                     <v-expansion-panel :key="index" v-if="classDefinition.display" class="expansion-panel">
                         <v-expansion-panel-header
@@ -23,18 +22,8 @@
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </template>
-                <!-- Create New Panel  -->
-                <v-expansion-panel class="expansion-panel create-class-panel">
-                    <v-expansion-panel-header
-                        class="expansion-panel-header create-class-header"
-                        @keyup.space.prevent
-                        :hide-actions="true"
-                    >
-                        <NewClassCard @save="saveNewClass" />
-                    </v-expansion-panel-header>
-                    <v-expansion-panel-content class="expansion-panel-content"> </v-expansion-panel-content>
-                </v-expansion-panel>
             </v-expansion-panels>
+            <NewClassButton @newClass="addNewClass" />
         </v-row>
         <ErrorAlert v-if="error" :error="error" />
     </div>
@@ -46,7 +35,7 @@ import Vue from 'vue';
 import ClassCard from '@/components/documentation/ClassCard.vue';
 import ErrorAlert from '@/components/common/ErrorAlert.vue';
 import MethodCard from '@/components/documentation/MethodCard.vue';
-import NewClassCard from '@/components/documentation/NewClassCard.vue';
+import NewClassButton from '@/components/documentation/NewClassButton.vue';
 import SearchBar from '@/components/documentation/SearchBar.vue';
 
 import DocsApi from '@/api/docs';
@@ -71,7 +60,7 @@ export default Vue.extend({
         ClassCard,
         ErrorAlert,
         MethodCard,
-        NewClassCard,
+        NewClassButton,
         SearchBar,
     },
     methods: {
@@ -80,14 +69,12 @@ export default Vue.extend({
             this.expandedPanels = [];
             for (const [index, c] of filteredDocumentation.classes.entries()) {
                 if (c.display) {
-                    // + 1 because of Create new Class is index 0
-                    this.expandedPanels.push(index + 1);
+                    this.expandedPanels.push(index);
                 }
             }
         },
-        saveNewClass(newClass: Class) {
-            // The Create New Class... expansion panel is index 0 for some reason, this feels liable to break
-            this.expandedPanels = this.expandedPanels.filter((i) => i !== 0);
+        addNewClass(newClass: Class) {
+            this.expandedPanels = [];
             this.documentation.classes.push(newClass);
         },
     },
@@ -133,15 +120,11 @@ export default Vue.extend({
     background-color: $background-grey;
 }
 
-.create-class-panel {
-    margin-top: 3vh;
-}
-
-.create-class-header {
-    padding: 0vh 1vw 0vh 0.5vw;
-}
-
 .method-card {
     margin: 1vh 1vw 1vh 1vw;
+}
+
+.create-new-card-btn {
+    margin-bottom: 6vh;
 }
 </style>
