@@ -62,23 +62,23 @@ export default Vue.extend({
         saveReturns(returns: Type) {
             this.method.returns = returns;
         },
-    }
+    },
 });
 </script>
 
 <style scoped lang="scss">
 @import '@/styles/colors.scss';
 
-.parameter-label, .returns-label {
+.parameter-label,
+.returns-label {
     padding-top: 0vh;
-    padding-bottom: .5vh;
+    padding-bottom: 0.5vh;
     font-weight: bold;
     font-size: 1em;
 }
 
-.v-card-text, .parameter-description {
-    
+.v-card-text,
+.parameter-description {
     margin-left: 1vw;
 }
-
 </style>

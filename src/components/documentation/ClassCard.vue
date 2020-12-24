@@ -38,8 +38,8 @@ export default Vue.extend({
         },
         saveDescription(description: string) {
             this.classDefinition.description = description;
-        }
-    }
+        },
+    },
 });
 </script>
 
@@ -49,5 +49,4 @@ export default Vue.extend({
 .class-card-title {
     font-weight: bold;
 }
-
 </style>
