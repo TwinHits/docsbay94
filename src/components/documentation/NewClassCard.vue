@@ -10,9 +10,7 @@
                 </v-card-subtitle>
             </v-card>
         </v-col>
-        <v-icon size="40" :color="iconColor" @click="save">
-            mdi-content-save-outline
-        </v-icon>
+        <IconButton icon="mdi-content-save-outline" :size="40" :disabled="!dirty" @click="save" />
     </v-row>
 </template>
 
@@ -20,37 +18,54 @@
 import Vue, { PropType } from 'vue';
 
 import EditableTextField from '@/components/common/EditableTextField.vue';
+import IconButton from '@/components/common/IconButton.vue';
 
 import * as Constants from '@/common/constants';
 import { Class, Method } from '@/common/types/documentation';
 
+const NAME_THIS_CLASS = 'Name this new class';
+const DESCRIBE_THIS_CLASS = 'Describe this new class';
+
 export default Vue.extend({
     components: {
         EditableTextField,
+        IconButton,
     },
     data() {
         return {
-            name: 'Name this new class' as string,
-            description: 'Describe this new class' as string,
+            name: NAME_THIS_CLASS as string,
+            description: DESCRIBE_THIS_CLASS as string,
             methods: [] as Method[],
             color: Constants.COLORS.HIGHLIGHT_GREY,
             iconColor: Constants.COLORS.BACKGROUND_BLACK,
+            dirty: false,
         };
     },
     methods: {
         saveName(name: string) {
             this.name = name;
+            this.dirty = true;
         },
         saveDescription(description: string) {
             this.description = description;
+            this.dirty = true;
         },
         save() {
-            const newClass = new Class({
-                name: this.name,
-                description: this.description,
-                methods: this.methods,
-            });
-            this.$emit('save', newClass);
+            if (this.dirty) {
+                const newClass = new Class({
+                    name: this.name,
+                    description: this.description,
+                    methods: this.methods,
+                });
+                this.resetCard();
+                this.$emit('save', newClass);
+            }
+        },
+        resetCard() {
+            this.name = DESCRIBE_THIS_CLASS;
+            this.description = DESCRIBE_THIS_CLASS;
+            this.methods = [];
+            this.dirty = false;
         },
     },
 });
