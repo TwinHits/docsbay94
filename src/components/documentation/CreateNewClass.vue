@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="create-new-card-btn" :color="color" fab x-large fixed bottom right @click="generateNewClass">
+    <v-btn class="create-new-class" :color="color" fab x-large fixed bottom right @click="generateNewClass">
         <v-icon>mdi-plus</v-icon>
     </v-btn>
 </template>
