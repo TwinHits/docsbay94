@@ -13,7 +13,7 @@
 import Vue, { PropType } from 'vue';
 
 import * as Constants from '@/common/constants';
-import Class from '@/api/types/documentation';
+import { Class } from '@/common/types/documentation';
 
 export default Vue.extend({
     props: {

@@ -19,7 +19,7 @@ import Vue, { PropType } from 'vue';
 
 import * as Constants from '@/common/constants';
 
-import Method from '@/api/types/documentation';
+import { Method } from '@/common/types/documentation';
 
 import ParameterChip from '@/components/documentation/ParameterChip.vue';
 import MethodChip from '@/components/documentation/MethodChip.vue';
