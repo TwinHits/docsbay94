@@ -16,6 +16,7 @@
                 </template>
             </v-card-text>
         </template>
+        <CreateNewParameter @newParameter="addNewParameter($event, method)" />
         <v-card-subtitle class="returns-label">
             Returns:
         </v-card-subtitle>
@@ -30,11 +31,12 @@ import Vue, { PropType } from 'vue';
 
 import * as Constants from '@/common/constants';
 
-import { Method } from '@/common/types/documentation';
+import { Method, Parameter } from '@/common/types/documentation';
 import { Type } from '@/api/types/documentation';
 
 import EditableTextField from '@/components/common/EditableTextField.vue';
 import ParameterChip from '@/components/documentation/ParameterChip.vue';
+import CreateNewParameter from '@/components/documentation/CreateNewParameter.vue';
 
 export default Vue.extend({
     props: {
@@ -49,6 +51,7 @@ export default Vue.extend({
         };
     },
     components: {
+        CreateNewParameter,
         EditableTextField,
         ParameterChip,
     },
@@ -61,6 +64,9 @@ export default Vue.extend({
         },
         saveReturns(returns: Type) {
             this.method.returns = returns;
+        },
+        addNewParameter(newParmameter: Parameter, method: Method) {
+            method.parameters.push(newParmameter);
         },
     },
 });

@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="create-new-method" :color="color" fab medium absolute bottom right @click="generateNewMethod">
+    <v-btn class="create-new-method" :color="color" fab small absolute bottom right @click="generateNewMethod">
         <v-icon>mdi-plus</v-icon>
     </v-btn>
 </template>
@@ -43,8 +43,6 @@ export default Vue.extend({
 @import '@/styles/colors.scss';
 
 .create-new-method {
-
-margin: 0 1vw 4vh 0;
+    margin: 0 1.5vw 3.5vh 0;
 }
-
 </style>

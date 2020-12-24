@@ -81,8 +81,8 @@ export default Vue.extend({
             this.documentation.classes.push(newClass);
         },
         addNewMethod(newMethod: Method, currentClass: Class) {
-           currentClass.methods.push(newMethod);
-        }
+            currentClass.methods.push(newMethod);
+        },
     },
     async mounted() {
         this.loading = true;
@@ -124,14 +124,14 @@ export default Vue.extend({
 
 .expansion-panel-content {
     background-color: $background-grey;
-    padding-bottom: 6vh;
+    padding-bottom: 4vh;
 }
 
 .method-card {
     margin: 1vh 1vw 1vh 1vw;
 }
 
-.create-new-card-btn {
-    margin-bottom: 6vh;
+.create-new-class {
+    margin: 6vh 1vw;
 }
 </style>
