@@ -1,22 +1,47 @@
 <template>
     <div class="documentation-view">
+        <!-- Search bar -->
         <v-row class="search-bar-row">
             <SearchBar :documentation="documentation" @search="onSearch" />
         </v-row>
         <v-row class="expansion-panels-row">
             <v-expansion-panels inset multiple class="expansion-panels" v-model="expandedPanels" :tile="true">
+                <!-- Class Panels -->
                 <v-expansion-panel
                     v-for="(classDefinition, index) in filteredDocumentation.classes"
                     :key="index"
                     class="expansion-panel"
                 >
-                    <v-expansion-panel-header class="expansion-panel-header" v-if="classDefinition.display" :hide-actions="true" @keyup.space.prevent >
+                    <v-expansion-panel-header
+                        class="expansion-panel-header"
+                        v-if="classDefinition.display"
+                        :hide-actions="true"
+                        @keyup.space.prevent
+                    >
                         <ClassCard :classDefinition="classDefinition" />
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="expansion-panel-content">
                         <template v-for="(method, index) in classDefinition.methods">
                             <MethodCard :method="method" :key="index" class="method-card" v-if="method.display" />
                         </template>
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
+                <!-- Create New Panel  -->
+                <v-expansion-panel class="expansion-panel">
+                    <v-expansion-panel-header
+                        class="expansion-panel-header"
+                        @keyup.space.prevent
+                        :disable-icon-rotate="true"
+                    >
+                        Create New Class...
+                        <template v-slot:actions>
+                            <v-icon large :color="iconColor">
+                                mdi-plus
+                            </v-icon>
+                        </template>
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content class="expansion-panel-content">
+                        <NewClassCard @save="saveNewClass" />
                     </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-expansion-panels>
@@ -31,11 +56,14 @@ import Vue from 'vue';
 import ErrorAlert from '@/components/common/ErrorAlert.vue';
 import ClassCard from '@/components/documentation/ClassCard.vue';
 import MethodCard from '@/components/documentation/MethodCard.vue';
+import NewClassCard from '@/components/documentation/NewClassCard.vue';
 import SearchBar from '@/components/documentation/SearchBar.vue';
 
 import DocsApi from '@/api/docs';
 
-import { Documentation } from '@/common/types/documentation';
+import { Class, Documentation } from '@/common/types/documentation';
+
+import * as Constants from '@/common/constants';
 
 export default Vue.extend({
     data() {
@@ -46,12 +74,14 @@ export default Vue.extend({
             filteredDocumentation: {} as Documentation,
             error: undefined as Error | undefined,
             expandedPanels: [] as number[],
+            iconColor: Constants.COLORS.BACKGROUND_BLACK,
         };
     },
     components: {
         ErrorAlert,
         ClassCard,
         MethodCard,
+        NewClassCard,
         SearchBar,
     },
     methods: {
@@ -63,6 +93,11 @@ export default Vue.extend({
                     this.expandedPanels.push(index);
                 }
             }
+        },
+        saveNewClass(newClass: Class) {
+            // The Create New Class... expansion panel is index 0 for some reason, this feels liable to break
+            this.expandedPanels = this.expandedPanels.filter((i) => i !== 0);
+            this.documentation.classes.push(newClass);
         },
     },
     async mounted() {
