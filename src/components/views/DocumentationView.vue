@@ -10,7 +10,7 @@
                     :key="index"
                     class="expansion-panel"
                 >
-                    <v-expansion-panel-header class="expansion-panel-header" v-if="classDefinition.display">
+                    <v-expansion-panel-header class="expansion-panel-header" v-if="classDefinition.display" :hide-actions="true" @keyup.space.prevent >
                         <ClassCard :classDefinition="classDefinition" />
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="expansion-panel-content">
