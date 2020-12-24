@@ -24,22 +24,15 @@
                     </v-expansion-panel>
                 </template>
                 <!-- Create New Panel  -->
-                <v-expansion-panel class="expansion-panel">
+                <v-expansion-panel class="expansion-panel create-class-panel">
                     <v-expansion-panel-header
-                        class="expansion-panel-header"
+                        class="expansion-panel-header create-class-header"
                         @keyup.space.prevent
-                        :disable-icon-rotate="true"
+                        :hide-actions="true"
                     >
-                        Create New Class...
-                        <template v-slot:actions>
-                            <v-icon large :color="iconColor">
-                                mdi-plus
-                            </v-icon>
-                        </template>
-                    </v-expansion-panel-header>
-                    <v-expansion-panel-content class="expansion-panel-content">
                         <NewClassCard @save="saveNewClass" />
-                    </v-expansion-panel-content>
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content class="expansion-panel-content"> </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-expansion-panels>
         </v-row>
@@ -50,8 +43,8 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import ErrorAlert from '@/components/common/ErrorAlert.vue';
 import ClassCard from '@/components/documentation/ClassCard.vue';
+import ErrorAlert from '@/components/common/ErrorAlert.vue';
 import MethodCard from '@/components/documentation/MethodCard.vue';
 import NewClassCard from '@/components/documentation/NewClassCard.vue';
 import SearchBar from '@/components/documentation/SearchBar.vue';
@@ -75,8 +68,8 @@ export default Vue.extend({
         };
     },
     components: {
-        ErrorAlert,
         ClassCard,
+        ErrorAlert,
         MethodCard,
         NewClassCard,
         SearchBar,
@@ -125,6 +118,7 @@ export default Vue.extend({
 .search-bar-row {
     background-color: $background-grey;
     padding: 2vh 1vw 0vh 1vw;
+    margin-bottom: 2vh;
 }
 
 .expansion-panel {
@@ -137,6 +131,14 @@ export default Vue.extend({
 
 .expansion-panel-content {
     background-color: $background-grey;
+}
+
+.create-class-panel {
+    margin-top: 3vh;
+}
+
+.create-class-header {
+    padding: 0vh 1vw 0vh 0.5vw;
 }
 
 .method-card {

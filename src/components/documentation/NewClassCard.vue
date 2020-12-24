@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue';
+import Vue from 'vue';
 
 import EditableTextField from '@/components/common/EditableTextField.vue';
 import IconButton from '@/components/common/IconButton.vue';
@@ -62,7 +62,7 @@ export default Vue.extend({
             }
         },
         resetCard() {
-            this.name = DESCRIBE_THIS_CLASS;
+            this.name = NAME_THIS_CLASS;
             this.description = DESCRIBE_THIS_CLASS;
             this.methods = [];
             this.dirty = false;

@@ -1,5 +1,5 @@
 <template>
-    <v-icon class="icon-button" :color="iconColor" :size="size" :disabled="disabled" @click="handleClick">
+    <v-icon class="icon-button" :color="iconColor" :size="size" :disabled="disabled" @click="handleClick" @click.stop>
         {{ icon }}
     </v-icon>
 </template>
@@ -24,7 +24,7 @@ export default Vue.extend({
             type: Boolean,
             required: false,
             default: false,
-        }
+        },
     },
     data() {
         return {
@@ -33,12 +33,10 @@ export default Vue.extend({
     },
     methods: {
         handleClick() {
-            this.$emit("click");
-        }
-    }
+            this.$emit('click');
+        },
+    },
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
