@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import DocumentationView from '@/components/DocumentationView.vue';
+import DocumentationView from '@/components/views/DocumentationView.vue';
 
 Vue.use(VueRouter);
 
