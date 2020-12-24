@@ -7,25 +7,22 @@
         <v-row class="expansion-panels-row">
             <v-expansion-panels inset multiple class="expansion-panels" v-model="expandedPanels" :tile="true">
                 <!-- Class Panels -->
-                <v-expansion-panel
-                    v-for="(classDefinition, index) in filteredDocumentation.classes"
-                    :key="index"
-                    class="expansion-panel"
-                >
-                    <v-expansion-panel-header
-                        class="expansion-panel-header"
-                        v-if="classDefinition.display"
-                        :hide-actions="true"
-                        @keyup.space.prevent
-                    >
-                        <ClassCard :classDefinition="classDefinition" />
-                    </v-expansion-panel-header>
-                    <v-expansion-panel-content class="expansion-panel-content">
-                        <template v-for="(method, index) in classDefinition.methods">
-                            <MethodCard :method="method" :key="index" class="method-card" v-if="method.display" />
-                        </template>
-                    </v-expansion-panel-content>
-                </v-expansion-panel>
+                <template v-for="(classDefinition, index) in filteredDocumentation.classes">
+                    <v-expansion-panel :key="index" v-if="classDefinition.display" class="expansion-panel">
+                        <v-expansion-panel-header
+                            class="expansion-panel-header"
+                            :hide-actions="true"
+                            @keyup.space.prevent
+                        >
+                            <ClassCard :classDefinition="classDefinition" />
+                        </v-expansion-panel-header>
+                        <v-expansion-panel-content class="expansion-panel-content">
+                            <template v-for="(method, index) in classDefinition.methods">
+                                <MethodCard :method="method" :key="index" class="method-card" v-if="method.display" />
+                            </template>
+                        </v-expansion-panel-content>
+                    </v-expansion-panel>
+                </template>
                 <!-- Create New Panel  -->
                 <v-expansion-panel class="expansion-panel">
                     <v-expansion-panel-header
@@ -90,7 +87,8 @@ export default Vue.extend({
             this.expandedPanels = [];
             for (const [index, c] of filteredDocumentation.classes.entries()) {
                 if (c.display) {
-                    this.expandedPanels.push(index);
+                    // + 1 because of Create new Class is index 0
+                    this.expandedPanels.push(index + 1);
                 }
             }
         },
