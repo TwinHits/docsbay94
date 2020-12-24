@@ -1,5 +1,9 @@
 <template>
-    <div @click.stop="setEdittingContent(true)" class="editable-text-field" :class="edittingContent ? 'editting' : 'content'">
+    <div
+        @click.stop="setEdittingContent(true)"
+        class="editable-text-field"
+        :class="edittingContent ? 'editting' : 'content'"
+    >
         <span v-if="!edittingContent">{{ content }}</span>
         <v-text-field
             v-else
@@ -21,8 +25,7 @@ export default Vue.extend({
     props: {
         content: {
             type: String,
-            required: false,
-            default: '',
+            required: true,
         },
     },
     data() {
@@ -49,7 +52,7 @@ export default Vue.extend({
 }
 
 .content {
-    display: inline-block
+    display: inline-block;
 }
 
 .editting {
