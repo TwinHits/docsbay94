@@ -4,7 +4,7 @@
             <MethodChip :method="method" />
         </v-card-title>
         <v-card-subtitle>
-            {{ method.description }}
+            <EditableTextField :content="method.description" @save="saveDescription" />
         </v-card-subtitle>
         <v-card-text v-if="method.parameters && method.parameters.length > 0">
             <template v-for="(parameter, index) in method.parameters">
@@ -21,6 +21,7 @@ import * as Constants from '@/common/constants';
 
 import { Method } from '@/common/types/documentation';
 
+import EditableTextField from '@/components/common/EditableTextField.vue';
 import ParameterChip from '@/components/documentation/ParameterChip.vue';
 import MethodChip from '@/components/documentation/MethodChip.vue';
 
@@ -37,9 +38,15 @@ export default Vue.extend({
         };
     },
     components: {
+        EditableTextField,
         ParameterChip,
         MethodChip,
     },
+    methods: {
+        saveDescription(description: string) {
+            this.method.description = description;
+        },
+    }
 });
 </script>
 
