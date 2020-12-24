@@ -1,5 +1,5 @@
 <template>
-    <div @click.stop="setEdittingContent(true)" class="editable-text-field">
+    <div @click.stop="setEdittingContent(true)" class="editable-text-field" :class="edittingContent ? 'editting' : 'content'">
         <span v-if="!edittingContent">{{ content }}</span>
         <v-text-field
             v-else
@@ -45,6 +45,14 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .editable-text-field {
-    width: 33%;
+    cursor: text;
+}
+
+.content {
+    display: inline-block
+}
+
+.editting {
+    width: 66%;
 }
 </style>
