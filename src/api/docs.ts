@@ -1,7 +1,7 @@
 import { DocumentationResponse } from '@/api/types/documentation';
 import { Documentation } from '@/common/types/documentation';
 
-const LOCAL_STORAGE_KEY = "docs-bay-94-docs";
+const LOCAL_STORAGE_KEY = 'docs-bay-94-docs';
 const localStorage = window.localStorage;
 
 class DocsApi {
@@ -19,7 +19,7 @@ class DocsApi {
 
     public async getDocsFromLocalStorage(): Promise<Documentation | undefined> {
         try {
-            const documentationJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
+            const documentationJSON = localStorage.getItem(LOCAL_STORAGE_KEY);
             if (documentationJSON && documentationJSON !== 'undefined') {
                 return new Documentation(JSON.parse(documentationJSON));
             } else {
@@ -41,14 +41,14 @@ class DocsApi {
     }
 
     public async downloadDocsFromLocalStorage() {
-            const documentation = await this.getDocsFromLocalStorage();
-            const filename = 'documentation.json';
-            const blob = new Blob([JSON.stringify(documentation)], { type: 'text/json'});
-            const url = URL.createObjectURL(blob)
-            const link = document.createElement('a');
-            link.download = filename;
-            link.href = url;
-            link.click();
+        const documentation = await this.getDocsFromLocalStorage();
+        const filename = 'documentation.json';
+        const blob = new Blob([JSON.stringify(documentation)], { type: 'text/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = url;
+        link.click();
     }
 }
 

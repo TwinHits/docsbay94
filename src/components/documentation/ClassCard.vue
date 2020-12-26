@@ -1,7 +1,14 @@
 <template>
     <v-card class="class-card" outlined elevation="1" :color="color">
         <v-card-title class="class-card-title">
-            <EditableTextField :content="classDefinition.name" @save="saveName" />
+            <v-row justify="space-between">
+                <v-col md="auto">
+                    <EditableTextField :content="classDefinition.name" @save="saveName" />
+                </v-col>
+                <v-col md="auto">
+                    <IconButton icon="mdi-delete" :size="30" @click="trash()" />
+                </v-col>
+            </v-row>
         </v-card-title>
         <v-card-subtitle>
             <EditableTextField :content="classDefinition.description" @save="saveDescription" />
@@ -13,6 +20,7 @@
 import Vue, { PropType } from 'vue';
 
 import EditableTextField from '@/components/common/EditableTextField.vue';
+import IconButton from '@/components/common/IconButton.vue';
 
 import * as Constants from '@/common/constants';
 import { Class } from '@/common/types/documentation';
@@ -26,6 +34,7 @@ export default Vue.extend({
     },
     components: {
         EditableTextField,
+        IconButton,
     },
     data() {
         return {
@@ -40,6 +49,9 @@ export default Vue.extend({
         saveDescription(description: string) {
             this.classDefinition.description = description;
             this.$emit('save');
+        },
+        trash() {
+            this.$emit('trash', this.classDefinition);
         },
     },
 });

@@ -13,11 +13,18 @@
                             :hide-actions="true"
                             @keyup.space.prevent
                         >
-                            <ClassCard :classDefinition="classDefinition" @save="save()" />
+                            <ClassCard :classDefinition="classDefinition" @save="save()" @trash="trashClass" />
                         </v-expansion-panel-header>
                         <v-expansion-panel-content class="expansion-panel-content">
                             <template v-for="(method, index) in classDefinition.methods">
-                                <MethodCard :method="method" :key="index" class="method-card" v-if="method.display" @save="save()" />
+                                <MethodCard
+                                    :method="method"
+                                    :key="index"
+                                    class="method-card"
+                                    v-if="method.display"
+                                    @save="save()"
+                                    @trash="trashMethod($event, classDefinition)"
+                                />
                             </template>
                             <CreateNewMethod @newMethod="addNewMethod($event, classDefinition)" />
                         </v-expansion-panel-content>
@@ -87,7 +94,15 @@ export default Vue.extend({
         },
         save() {
             DocsApi.writeDocsToLocalStorage(this.documentation);
-        }
+        },
+        trashClass(classDefinition: Class) {
+            this.documentation.classes = this.documentation.classes.filter((c) => c !== classDefinition);
+            this.save();
+        },
+        trashMethod(method: Method, classDefinition: Class) {
+            classDefinition.methods = classDefinition.methods.filter((m) => m !== method);
+            this.save();
+        },
     },
     async mounted() {
         this.loading = true;

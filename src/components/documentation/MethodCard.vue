@@ -1,7 +1,14 @@
 <template>
     <v-card class="method-card" outlined elevation="2" :color="color">
         <v-card-title>
-            <EditableTextField :content="method.name" @save="saveName" />
+            <v-row justify="space-between">
+                <v-col md="auto">
+                    <EditableTextField :content="method.name" @save="saveName" />
+                </v-col>
+                <v-col md="auto">
+                    <IconButton icon="mdi-delete" :size="30" @click="trash()" />
+                </v-col>
+            </v-row>
         </v-card-title>
         <v-card-subtitle class="method-description">
             <EditableTextField :content="method.description" @save="saveDescription" />
@@ -12,7 +19,7 @@
             </v-card-subtitle>
             <v-card-text class="v-card-text">
                 <template v-for="(parameter, index) in method.parameters">
-                    <ParameterChip :parameter="parameter" :key="index" @save="save()" />
+                    <ParameterChip :parameter="parameter" :key="index" @save="save()" @trash="trashParameter" />
                 </template>
                 <CreateNewParameter @newParameter="addNewParameter($event, method)" />
             </v-card-text>
@@ -34,9 +41,10 @@ import * as Constants from '@/common/constants';
 import { Method, Parameter } from '@/common/types/documentation';
 import { Type } from '@/api/types/documentation';
 
-import EditableTextField from '@/components/common/EditableTextField.vue';
-import ParameterChip from '@/components/documentation/ParameterChip.vue';
 import CreateNewParameter from '@/components/documentation/CreateNewParameter.vue';
+import EditableTextField from '@/components/common/EditableTextField.vue';
+import IconButton from '@/components/common/IconButton.vue';
+import ParameterChip from '@/components/documentation/ParameterChip.vue';
 
 export default Vue.extend({
     props: {
@@ -53,6 +61,7 @@ export default Vue.extend({
     components: {
         CreateNewParameter,
         EditableTextField,
+        IconButton,
         ParameterChip,
     },
     methods: {
@@ -72,7 +81,14 @@ export default Vue.extend({
         },
         save() {
             this.$emit('save');
-        }
+        },
+        trash() {
+            this.$emit('trash', this.method);
+        },
+        trashParameter(parameter: Parameter) {
+            this.method.parameters = this.method.parameters.filter((p) => p !== parameter);
+            this.save();
+        },
     },
 });
 </script>

@@ -23,7 +23,7 @@ export default Vue.extend({
         };
     },
     components: {
-        IconButton
+        IconButton,
     },
     methods: {
         download() {
@@ -32,8 +32,8 @@ export default Vue.extend({
         async refresh() {
             const documentation = await DocsApi.getDocsFromURL(Config.docsUrl);
             await DocsApi.writeDocsToLocalStorage(documentation);
-        }
-    }
+        },
+    },
 });
 </script>
 
