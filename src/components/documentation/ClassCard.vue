@@ -35,9 +35,11 @@ export default Vue.extend({
     methods: {
         saveName(name: string) {
             this.classDefinition.name = name;
+            this.$emit('save');
         },
         saveDescription(description: string) {
             this.classDefinition.description = description;
+            this.$emit('save');
         },
     },
 });

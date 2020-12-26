@@ -12,7 +12,7 @@
             </v-card-subtitle>
             <v-card-text class="v-card-text">
                 <template v-for="(parameter, index) in method.parameters">
-                    <ParameterChip :parameter="parameter" :key="index" />
+                    <ParameterChip :parameter="parameter" :key="index" @save="save()" />
                 </template>
                 <CreateNewParameter @newParameter="addNewParameter($event, method)" />
             </v-card-text>
@@ -58,9 +58,11 @@ export default Vue.extend({
     methods: {
         saveName(name: string) {
             this.method.name = name;
+            this.save();
         },
         saveDescription(description: string) {
             this.method.description = description;
+            this.save();
         },
         saveReturns(returns: Type) {
             this.method.returns = returns;
@@ -68,6 +70,9 @@ export default Vue.extend({
         addNewParameter(newParmameter: Parameter, method: Method) {
             method.parameters.push(newParmameter);
         },
+        save() {
+            this.$emit('save');
+        }
     },
 });
 </script>

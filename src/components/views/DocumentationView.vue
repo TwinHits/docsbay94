@@ -13,11 +13,11 @@
                             :hide-actions="true"
                             @keyup.space.prevent
                         >
-                            <ClassCard :classDefinition="classDefinition" />
+                            <ClassCard :classDefinition="classDefinition" @save="save()" />
                         </v-expansion-panel-header>
                         <v-expansion-panel-content class="expansion-panel-content">
                             <template v-for="(method, index) in classDefinition.methods">
-                                <MethodCard :method="method" :key="index" class="method-card" v-if="method.display" />
+                                <MethodCard :method="method" :key="index" class="method-card" v-if="method.display" @save="save()" />
                             </template>
                             <CreateNewMethod @newMethod="addNewMethod($event, classDefinition)" />
                         </v-expansion-panel-content>
@@ -85,11 +85,18 @@ export default Vue.extend({
         addNewMethod(newMethod: Method, currentClass: Class) {
             currentClass.methods.push(newMethod);
         },
+        save() {
+            DocsApi.writeDocsToLocalStorage(this.documentation);
+        }
     },
     async mounted() {
         this.loading = true;
         try {
-            this.documentation = await DocsApi.getDocsFromURL(this.docsUrl);
+            let documentation = await DocsApi.getDocsFromLocalStorage();
+            if (!documentation) {
+                documentation = await DocsApi.getDocsFromURL(Config.docsUrl);
+            }
+            this.documentation = documentation;
             this.filteredDocumentation = this.documentation;
         } catch (error) {
             this.error = error;
