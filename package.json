@@ -11,6 +11,7 @@
     "start": "vue-cli-service serve"
   },
   "dependencies": {
+    "@types/node": "^14.14.14",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",

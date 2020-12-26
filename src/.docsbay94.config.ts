@@ -1,0 +1,1 @@
+export const docsUrl = "https://raw.githubusercontent.com/TwinHits/TIEngine/master/docs/docs.json";

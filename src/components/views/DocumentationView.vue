@@ -46,11 +46,13 @@ import { Class, Documentation, Method } from '@/common/types/documentation';
 
 import * as Constants from '@/common/constants';
 
+import * as Config from '../../.docsbay94.config';
+
 export default Vue.extend({
     data() {
         return {
             loading: true as boolean,
-            docsUrl: 'https://raw.githubusercontent.com/TwinHits/TIEngine/master/docs/docs.json' as string,
+            docsUrl: Config.docsUrl,
             documentation: {} as Documentation,
             filteredDocumentation: {} as Documentation,
             error: undefined as Error | undefined,
