@@ -7,7 +7,7 @@ const localStorage = window.localStorage;
 class DocsApi {
     public async getDocsFromURL(url: string): Promise<Documentation> {
         try {
-            const documentationResponse = await (await fetch(url)).json();
+            const documentationResponse = (await (await fetch(url)).json()) as DocumentationResponse;
             const documentation = new Documentation(documentationResponse);
             this.writeDocsToLocalStorage(documentation);
             return documentation;

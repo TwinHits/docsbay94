@@ -6,7 +6,7 @@
                     <EditableTextField :content="method.name" @save="saveName" />
                 </v-col>
                 <v-col md="auto">
-                    <IconButton icon="mdi-delete" :size="30" @click="trash()" />
+                    <IconButton icon="mdi-delete" :size="30" @click="trash()" :confirm="true" />
                 </v-col>
             </v-row>
         </v-card-title>

@@ -2,7 +2,7 @@
     <v-app-bar elevation="2" dense :color="color" app>
         <v-app-bar-nav-icon><v-img src="@/assets/logo_icon_32x32.png"/></v-app-bar-nav-icon>
         <IconButton icon="mdi-download" @click="download" />
-        <IconButton icon="mdi-refresh" @click="refresh" />
+        <IconButton icon="mdi-refresh" @click="refresh" :confirm="true" />
     </v-app-bar>
 </template>
 
