@@ -41,6 +41,6 @@ export default Vue.extend({
 @import '@/styles/colors.scss';
 
 .create-new-parameter {
-    margin: 0vh 0vw 2vh 2vw;
+    margin: 0vh 0vw 1vh 0vw;
 }
 </style>

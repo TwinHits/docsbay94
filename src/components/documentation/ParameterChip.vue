@@ -47,10 +47,10 @@ export default Vue.extend({
 @import '@/styles/colors.scss';
 
 .parameter-type {
-    font-weight: bold;
 }
 
 .parameter-name {
+    font-weight: bold;
 }
 
 .parameter-description {
